@@ -5,7 +5,7 @@ import { Logo } from '../components/Logo'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const SPORTS = [{id:'Tennis',icon:'🎾'},{id:'Padel',icon:'🏓'},{id:'Pickleball',icon:'🏓'},{id:'Basketball',icon:'🏀'},{id:'Soccer',icon:'⚽'},{id:'Volleyball',icon:'🏐'}]
+const SPORTS = [{id:'Tennis',icon:'🎾'},{id:'Padel',icon:'🏓'},{id:'Pickleball',icon:'🏓'},{id:'Basketball',icon:'🏀'},{id:'Soccer',icon:'⚽'},{id:'Volleyball',icon:'🏐'},{id:'Beach Tennis',icon:'🎾'},{id:'Beach Volleyball',icon:'🏐'}]
 
 export default function CreateMatch() {
   const nav = useNavigate()
