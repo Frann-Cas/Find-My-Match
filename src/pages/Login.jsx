@@ -55,4 +55,18 @@ export default function Login() {
             <div style={{textAlign:'right',marginBottom:'20px'}}>
               <button type="button" onClick={handleForgotPassword} style={{background:'none',border:'none',color:'#757070',fontSize:'12px',cursor:'pointer',fontFamily:'DM Sans,sans-serif'}}>Forgot password?</button>
             </div>
-            <button type="submit" disabled={loa
+            <button type="submit" disabled={loading} style={{width:'100%',padding:'14px',borderRadius:'8px',border:'none',background:'#F63676',color:'#FFFFFF',fontSize:'13px',fontWeight:800,fontFamily:'Montserrat,sans-serif',letterSpacing:'1px',textTransform:'uppercase',opacity:loading?0.7:1}}>
+              {loading ? 'SIGNING IN...' : 'SIGN IN'}
+            </button>
+          </form>
+          <div style={{textAlign:'center',marginTop:'20px',fontSize:'13px',color:'#757070',fontFamily:'DM Sans,sans-serif'}}>
+            No account? <Link to="/signup" style={{color:'#F63676',fontWeight:600}}>Sign up free</Link>
+          </div>
+        </div>
+      </div>
+      <div style={{textAlign:'center',padding:'16px',fontSize:'11px',color:'rgba(117,112,112,0.5)',fontFamily:'DM Sans,sans-serif'}}>
+        © 2026 Arena Complex LLC · My Referi by Areya
+      </div>
+    </div>
+  )
+}
