@@ -1,47 +1,46 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useMatches } from '../hooks/useMatches'
+import { Logo } from '../components/Logo'
 
 const sportEmoji = {Tennis:'🎾',Padel:'🏓',Pickleball:'🏓',Basketball:'🏀',Soccer:'⚽',Volleyball:'🏐'}
 const statusStyle = {
-  open:{bg:'#FFF8E7',color:'#B45309',label:'Open'},
-  confirmed:{bg:'#EEF2FF',color:'var(--purple)',label:'Confirmed'},
-  live:{bg:'rgba(239,68,68,0.1)',color:'var(--red)',label:'🔴 Live'},
-  finished:{bg:'#F0FDF4',color:'#15803D',label:'Finished'},
-  canceled:{bg:'#F8FAFC',color:'var(--slate)',label:'Canceled'},
+  open:{bg:'rgba(237,255,0,0.1)',color:'#EDFF00',border:'rgba(237,255,0,0.3)',label:'OPEN'},
+  confirmed:{bg:'rgba(139,92,246,0.1)',color:'#8B5CF6',border:'rgba(139,92,246,0.3)',label:'CONFIRMED'},
+  live:{bg:'rgba(246,54,118,0.1)',color:'#F63676',border:'rgba(246,54,118,0.3)',label:'🔴 LIVE'},
+  finished:{bg:'rgba(16,185,129,0.1)',color:'#10B981',border:'rgba(16,185,129,0.3)',label:'FINISHED'},
 }
 
 function MatchCard({ match }) {
   const nav = useNavigate()
   const ss = statusStyle[match.status] || statusStyle.open
-  const isLive = match.status === 'live'
   return (
-    <div onClick={()=>isLive && nav(`/score/${match.id}`)} style={{background:'var(--white)',borderRadius:'16px',padding:'16px',border:'1px solid var(--border)',marginBottom:'10px',cursor:isLive?'pointer':'default'}}>
-      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'10px'}}>
+    <div onClick={()=>match.status==='live'&&nav(`/score/${match.id}`)} style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'14px',padding:'16px',marginBottom:'10px',cursor:match.status==='live'?'pointer':'default'}}>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'12px'}}>
         <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
-          <div style={{width:'40px',height:'40px',borderRadius:'10px',background:'var(--green-pale)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px'}}>{sportEmoji[match.sport]||'🏆'}</div>
+          <div style={{width:'40px',height:'40px',borderRadius:'10px',background:'rgba(246,54,118,0.1)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px'}}>{sportEmoji[match.sport]||'🏆'}</div>
           <div>
-            <div style={{fontSize:'14px',fontWeight:700}}>{match.title}</div>
-            <div style={{fontSize:'11px',color:'var(--slate)',marginTop:'2px'}}>{match.sport} · {match.location}</div>
+            <div style={{fontSize:'14px',fontWeight:700,color:'#FFFFFF',fontFamily:'Montserrat,sans-serif'}}>{match.title}</div>
+            <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>{match.sport} · {match.location}</div>
           </div>
         </div>
-        <div style={{background:ss.bg,color:ss.color,fontSize:'10px',fontWeight:700,padding:'4px 10px',borderRadius:'20px',letterSpacing:'0.5px'}}>{ss.label}</div>
+        <div style={{background:ss.bg,border:`1px solid ${ss.border}`,color:ss.color,fontSize:'9px',fontWeight:800,padding:'4px 10px',borderRadius:'20px',letterSpacing:'1px',fontFamily:'Montserrat,sans-serif'}}>{ss.label}</div>
       </div>
-      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',paddingTop:'10px',borderTop:'1px solid var(--border)'}}>
-        <div style={{fontSize:'13px',fontWeight:700,color:'var(--green)'}}>{match.pay_rate ? `$${match.pay_rate}` : ''}</div>
-        <div style={{fontSize:'11px',color:'var(--slate)'}}>{match.team1_name} vs {match.team2_name}</div>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',paddingTop:'10px',borderTop:'1px solid rgba(255,255,255,0.05)'}}>
+        <div style={{fontSize:'14px',fontWeight:800,color:'#F63676',fontFamily:'Montserrat,sans-serif'}}>{match.pay_rate?`$${match.pay_rate}`:''}</div>
+        <div style={{fontSize:'11px',color:'#757070',fontFamily:'DM Sans,sans-serif'}}>{match.team1_name} vs {match.team2_name}</div>
       </div>
-      {match.live_scores?.[0] && isLive && (
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'16px',marginTop:'12px',padding:'10px',background:'var(--green-pale)',borderRadius:'10px'}}>
-          <span style={{fontFamily:'Syne,sans-serif',fontSize:'22px',fontWeight:800}}>{match.live_scores[0].score1}</span>
-          <span style={{fontSize:'12px',color:'var(--slate)'}}>vs</span>
-          <span style={{fontFamily:'Syne,sans-serif',fontSize:'22px',fontWeight:800}}>{match.live_scores[0].score2}</span>
+      {match.status==='live'&&match.live_scores?.[0]&&(
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'20px',marginTop:'12px',padding:'12px',background:'rgba(246,54,118,0.08)',borderRadius:'10px',border:'1px solid rgba(246,54,118,0.15)'}}>
+          <span style={{fontFamily:'Montserrat,sans-serif',fontSize:'24px',fontWeight:900,color:'#FFFFFF'}}>{match.live_scores[0].score1}</span>
+          <span style={{fontSize:'11px',color:'#757070',fontWeight:600}}>VS</span>
+          <span style={{fontFamily:'Montserrat,sans-serif',fontSize:'24px',fontWeight:900,color:'#FFFFFF'}}>{match.live_scores[0].score2}</span>
         </div>
       )}
-      {isLive && match.viewer_token && (
-        <div style={{marginTop:'10px',padding:'8px 12px',background:'#F0FDF4',borderRadius:'8px',fontSize:'11px',color:'#15803D',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-          <span>Share live link</span>
-          <span style={{fontFamily:'monospace',fontSize:'10px'}}>{`${import.meta.env.VITE_APP_URL||''}/live/${match.viewer_token}`}</span>
+      {match.status==='live'&&match.viewer_token&&(
+        <div style={{marginTop:'10px',padding:'8px 12px',background:'rgba(237,255,0,0.05)',borderRadius:'8px',fontSize:'11px',color:'#EDFF00',border:'1px solid rgba(237,255,0,0.15)',display:'flex',alignItems:'center',justifyContent:'space-between',fontFamily:'DM Sans,sans-serif'}}>
+          <span>📤 Share live link</span>
+          <span style={{fontFamily:'monospace',fontSize:'10px',opacity:0.7}}>{`${import.meta.env.VITE_APP_URL||''}/live/${match.viewer_token}`}</span>
         </div>
       )}
     </div>
@@ -55,53 +54,47 @@ export default function PlayerDash() {
   const liveCount = matches.filter(m=>m.status==='live'||m.status==='confirmed').length
 
   return (
-    <div style={{maxWidth:'480px',margin:'0 auto',minHeight:'100vh',background:'var(--bg)'}}>
-      {/* Topbar */}
-      <div style={{background:'var(--navy)',padding:'0 16px',height:'56px',display:'flex',alignItems:'center',justifyContent:'space-between',position:'sticky',top:0,zIndex:100}}>
-        <div style={{fontFamily:'Syne,sans-serif',fontSize:'18px',fontWeight:800,color:'#fff'}}>Find<span style={{color:'var(--green)'}}>My</span>Match</div>
+    <div style={{maxWidth:'480px',margin:'0 auto',minHeight:'100vh',background:'#0A0000'}}>
+      <div style={{background:'#0A0000',padding:'0 16px',height:'58px',display:'flex',alignItems:'center',justifyContent:'space-between',position:'sticky',top:0,zIndex:100,borderBottom:'1px solid rgba(246,54,118,0.1)'}}>
+        <Logo size="sm" />
         <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
-          <div style={{fontSize:'10px',fontWeight:600,color:'var(--green)',background:'rgba(0,201,123,0.15)',padding:'3px 8px',borderRadius:'20px',textTransform:'uppercase',letterSpacing:'0.5px'}}>{profile?.role}</div>
-          <button onClick={signOut} style={{background:'transparent',border:'none',color:'#64748B',fontSize:'12px',fontWeight:600}}>Sign out</button>
+          <div style={{fontSize:'9px',fontWeight:800,color:'#F63676',background:'rgba(246,54,118,0.1)',padding:'3px 8px',borderRadius:'20px',textTransform:'uppercase',letterSpacing:'1px',fontFamily:'Montserrat,sans-serif',border:'1px solid rgba(246,54,118,0.2)'}}>{profile?.role}</div>
+          <button onClick={signOut} style={{background:'transparent',border:'none',color:'#757070',fontSize:'12px',fontWeight:600,fontFamily:'DM Sans,sans-serif'}}>Sign out</button>
         </div>
       </div>
 
-      {/* Header */}
-      <div style={{background:'var(--navy)',padding:'20px 16px 28px'}}>
-        <div style={{fontSize:'12px',color:'#64748B',marginBottom:'4px'}}>Good to see you,</div>
-        <div style={{fontFamily:'Syne,sans-serif',fontSize:'22px',fontWeight:800,color:'#fff'}}>{profile?.full_name?.split(' ')[0]} <span style={{color:'var(--green)'}}>{profile?.full_name?.split(' ').slice(1).join(' ')}</span></div>
+      <div style={{background:'linear-gradient(135deg,#140008 0%,#0A0000 100%)',padding:'24px 16px 32px',borderBottom:'3px solid transparent',borderImage:'linear-gradient(90deg,#F63676,#757070,#EDFF00) 1'}}>
+        <div style={{fontSize:'11px',color:'#757070',marginBottom:'4px',fontFamily:'Montserrat,sans-serif',fontWeight:600,letterSpacing:'1px',textTransform:'uppercase'}}>Good to see you,</div>
+        <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'26px',fontWeight:900,color:'#FFFFFF',letterSpacing:'-0.5px'}}>{profile?.full_name?.split(' ')[0]} <span style={{color:'#F63676'}}>{profile?.full_name?.split(' ').slice(1).join(' ')}</span></div>
       </div>
 
       <div style={{padding:'16px 16px 80px'}}>
-        {/* Stats */}
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'10px',marginBottom:'20px'}}>
-          <div style={{background:'var(--white)',borderRadius:'14px',padding:'16px',border:'1px solid var(--border)'}}>
-            <div style={{fontFamily:'Syne,sans-serif',fontSize:'28px',fontWeight:800}}>{matches.length}</div>
-            <div style={{fontSize:'11px',color:'var(--slate)',marginTop:'2px'}}>Total Matches</div>
+          <div style={{background:'rgba(255,255,255,0.03)',borderRadius:'14px',padding:'16px',border:'1px solid rgba(255,255,255,0.06)'}}>
+            <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'30px',fontWeight:900,color:'#FFFFFF'}}>{matches.length}</div>
+            <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>Total Matches</div>
           </div>
-          <div style={{background:'var(--white)',borderRadius:'14px',padding:'16px',border:'1px solid var(--border)'}}>
-            <div style={{fontFamily:'Syne,sans-serif',fontSize:'28px',fontWeight:800,color:'var(--green)'}}>{liveCount}</div>
-            <div style={{fontSize:'11px',color:'var(--slate)',marginTop:'2px'}}>Active / Live</div>
+          <div style={{background:'rgba(246,54,118,0.08)',borderRadius:'14px',padding:'16px',border:'1px solid rgba(246,54,118,0.15)'}}>
+            <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'30px',fontWeight:900,color:'#F63676'}}>{liveCount}</div>
+            <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>Active / Live</div>
           </div>
         </div>
 
-        {/* Create button */}
-        <button onClick={()=>nav('/create-match')} style={{width:'100%',padding:'15px',borderRadius:'14px',border:'none',background:'var(--green)',color:'var(--navy)',fontSize:'15px',fontWeight:700,marginBottom:'24px',letterSpacing:'-0.2px'}}>
-          + Create Match Request
+        <button onClick={()=>nav('/create-match')} style={{width:'100%',padding:'15px',borderRadius:'12px',border:'none',background:'#F63676',color:'#FFFFFF',fontSize:'13px',fontWeight:800,marginBottom:'24px',fontFamily:'Montserrat,sans-serif',letterSpacing:'1px',textTransform:'uppercase'}}>
+          + POST MATCH REQUEST
         </button>
 
-        {/* Matches */}
-        <div style={{fontFamily:'Syne,sans-serif',fontSize:'16px',fontWeight:700,marginBottom:'12px'}}>Your Matches</div>
-        {loading ? <div style={{textAlign:'center',color:'var(--slate)',padding:'40px',fontSize:'14px'}}>Loading matches...</div>
-          : matches.length === 0 ? <div style={{textAlign:'center',color:'var(--slate)',padding:'40px',fontSize:'14px'}}>No matches yet. Create your first one!</div>
-          : matches.map(m => <MatchCard key={m.id} match={m} />)}
+        <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'13px',fontWeight:800,color:'#FFFFFF',marginBottom:'12px',letterSpacing:'0.5px',textTransform:'uppercase'}}>Your Matches</div>
+        {loading ? <div style={{textAlign:'center',color:'#757070',padding:'40px',fontSize:'14px'}}>Loading...</div>
+          : matches.length === 0 ? <div style={{textAlign:'center',color:'#757070',padding:'40px',fontSize:'14px',fontFamily:'DM Sans,sans-serif'}}>No matches yet. Post your first one!</div>
+          : matches.map(m=><MatchCard key={m.id} match={m} />)}
       </div>
 
-      {/* Bottom nav */}
-      <div style={{position:'fixed',bottom:0,left:'50%',transform:'translateX(-50%)',width:'100%',maxWidth:'480px',background:'var(--white)',borderTop:'1px solid var(--border)',display:'flex',padding:'8px 0 12px',zIndex:90}}>
+      <div style={{position:'fixed',bottom:0,left:'50%',transform:'translateX(-50%)',width:'100%',maxWidth:'480px',background:'#0A0000',borderTop:'1px solid rgba(246,54,118,0.1)',display:'flex',padding:'8px 0 14px',zIndex:90}}>
         {[['🏠','Home',()=>{}],['➕','Create',()=>nav('/create-match')],['⚙️','Admin',()=>nav('/admin')]].map(([icon,label,action])=>(
           <div key={label} onClick={action} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',cursor:'pointer'}}>
             <div style={{fontSize:'20px'}}>{icon}</div>
-            <div style={{fontSize:'10px',fontWeight:600,color:'var(--slate)'}}>{label}</div>
+            <div style={{fontSize:'9px',fontWeight:700,color:'#757070',fontFamily:'Montserrat,sans-serif',letterSpacing:'0.5px',textTransform:'uppercase'}}>{label}</div>
           </div>
         ))}
       </div>

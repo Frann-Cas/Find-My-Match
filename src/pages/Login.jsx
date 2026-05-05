@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { Logo } from '../components/Logo'
 
 export default function Login() {
   const { signIn } = useAuth()
@@ -17,30 +18,38 @@ export default function Login() {
     if (error) { setError(error.message); setLoading(false) }
   }
 
-  const inp = { width:'100%',padding:'11px 14px',borderRadius:'10px',border:'1px solid var(--border)',fontSize:'14px',background:'var(--bg)',outline:'none',marginTop:'6px' }
-  const lbl = { fontSize:'12px',fontWeight:600,color:'var(--navy)',display:'block' }
+  const inp = { width:'100%',padding:'12px 14px',borderRadius:'8px',border:'1px solid rgba(246,54,118,0.2)',fontSize:'14px',background:'rgba(255,255,255,0.05)',outline:'none',marginTop:'6px',color:'#FFFFFF',fontFamily:'DM Sans,sans-serif' }
 
   return (
-    <div style={{background:'var(--navy)',minHeight:'100vh',display:'flex',flexDirection:'column'}}>
-      <nav style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'16px 24px',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
-        <div style={{fontFamily:'Syne,sans-serif',fontSize:'20px',fontWeight:800,color:'#fff'}}>Find<span style={{color:'var(--green)'}}>My</span>Match</div>
+    <div style={{background:'#0A0000',minHeight:'100vh',display:'flex',flexDirection:'column'}}>
+      <nav style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'20px 24px',borderBottom:'1px solid rgba(246,54,118,0.1)'}}>
+        <Logo size="md" />
       </nav>
       <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',padding:'24px'}}>
-        <div style={{background:'var(--white)',borderRadius:'20px',padding:'32px 28px',width:'100%',maxWidth:'400px',border:'1px solid var(--border)'}}>
-          <div style={{fontFamily:'Syne,sans-serif',fontSize:'24px',fontWeight:800,marginBottom:'6px'}}>Welcome back 👋</div>
-          <div style={{fontSize:'14px',color:'var(--slate)',marginBottom:'28px'}}>Sign in to your account</div>
-          {error && <div style={{background:'#FEF2F2',color:'var(--red)',padding:'10px 14px',borderRadius:'10px',fontSize:'13px',marginBottom:'16px'}}>{error}</div>}
+        <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(246,54,118,0.15)',borderRadius:'16px',padding:'36px 32px',width:'100%',maxWidth:'400px'}}>
+          <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'24px',fontWeight:900,color:'#FFFFFF',marginBottom:'6px',letterSpacing:'-0.5px'}}>WELCOME BACK</div>
+          <div style={{fontSize:'13px',color:'#757070',marginBottom:'28px',fontFamily:'DM Sans,sans-serif'}}>Sign in to your My Referi account</div>
+          {error && <div style={{background:'rgba(246,54,118,0.1)',border:'1px solid rgba(246,54,118,0.3)',color:'#F63676',padding:'10px 14px',borderRadius:'8px',fontSize:'13px',marginBottom:'16px'}}>{error}</div>}
           <form onSubmit={handleSubmit}>
-            <div style={{marginBottom:'16px'}}><label style={lbl}>Email<input style={inp} type="email" value={email} onChange={e=>setEmail(e.target.value)} required /></label></div>
-            <div style={{marginBottom:'20px'}}><label style={lbl}>Password<input style={inp} type="password" value={password} onChange={e=>setPassword(e.target.value)} required /></label></div>
-            <button type="submit" disabled={loading} style={{width:'100%',padding:'13px',borderRadius:'12px',border:'none',background:'var(--green)',color:'var(--navy)',fontSize:'15px',fontWeight:700,opacity:loading?0.7:1}}>
-              {loading ? 'Signing in...' : 'Sign In'}
+            <div style={{marginBottom:'16px'}}>
+              <label style={{fontSize:'11px',fontWeight:700,color:'#757070',display:'block',letterSpacing:'1px',fontFamily:'Montserrat,sans-serif',textTransform:'uppercase'}}>Email</label>
+              <input style={inp} type="email" value={email} onChange={e=>setEmail(e.target.value)} required placeholder="you@example.com" />
+            </div>
+            <div style={{marginBottom:'24px'}}>
+              <label style={{fontSize:'11px',fontWeight:700,color:'#757070',display:'block',letterSpacing:'1px',fontFamily:'Montserrat,sans-serif',textTransform:'uppercase'}}>Password</label>
+              <input style={inp} type="password" value={password} onChange={e=>setPassword(e.target.value)} required placeholder="••••••••" />
+            </div>
+            <button type="submit" disabled={loading} style={{width:'100%',padding:'14px',borderRadius:'8px',border:'none',background:'#F63676',color:'#FFFFFF',fontSize:'13px',fontWeight:800,fontFamily:'Montserrat,sans-serif',letterSpacing:'1px',textTransform:'uppercase',opacity:loading?0.7:1}}>
+              {loading ? 'SIGNING IN...' : 'SIGN IN'}
             </button>
           </form>
-          <div style={{textAlign:'center',marginTop:'20px',fontSize:'13px',color:'var(--slate)'}}>
-            No account? <Link to="/signup" style={{color:'var(--green)',fontWeight:600}}>Sign up free</Link>
+          <div style={{textAlign:'center',marginTop:'20px',fontSize:'13px',color:'#757070',fontFamily:'DM Sans,sans-serif'}}>
+            No account? <Link to="/signup" style={{color:'#F63676',fontWeight:600}}>Sign up free</Link>
           </div>
         </div>
+      </div>
+      <div style={{textAlign:'center',padding:'16px',fontSize:'11px',color:'rgba(117,112,112,0.5)',fontFamily:'DM Sans,sans-serif'}}>
+        © 2026 Arena Complex LLC · My Referi by Areya
       </div>
     </div>
   )
