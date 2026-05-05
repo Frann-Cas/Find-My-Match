@@ -14,8 +14,9 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true); setError('')
-    const { error } = await signIn({ email, password })
-    if (error) { setError(error.message); setLoading(false) }
+const { error } = await signIn({ email, password })
+if (error) { setError(error.message); setLoading(false) }
+else nav('/dashboard')
   }
 
   const inp = { width:'100%',padding:'12px 14px',borderRadius:'8px',border:'1px solid rgba(246,54,118,0.2)',fontSize:'14px',background:'rgba(255,255,255,0.05)',outline:'none',marginTop:'6px',color:'#FFFFFF',fontFamily:'DM Sans,sans-serif' }
