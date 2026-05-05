@@ -53,21 +53,21 @@ export default function LiveScoring() {
     <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
       <button onClick={()=>adj(team,-1)} style={{width:'32px',height:'32px',borderRadius:'8px',border:'1px solid var(--border)',background:'var(--bg)',fontSize:'18px',fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--slate)'}}>−</button>
       <div style={{fontFamily:'Syne,sans-serif',fontSize:isTeam?'48px':'38px',fontWeight:800,width:isTeam?'64px':'52px',textAlign:'center',lineHeight:1}}>{s}</div>
-      <button onClick={()=>adj(team,1)} style={{width:'32px',height:'32px',borderRadius:'8px',border:'none',background:'var(--green)',fontSize:'18px',fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--navy)'}}>+</button>
+      <button onClick={()=>adj(team,1)} style={{width:'32px',height:'32px',borderRadius:'8px',border:'none',background:'var(--green)',fontSize:'18px',fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center',color:'#0A0000'}}>+</button>
     </div>
   )
 
   return (
     <div style={{maxWidth:'480px',margin:'0 auto',background:'var(--bg)',minHeight:'100vh'}}>
       {/* Topbar */}
-      <div style={{background:'var(--navy)',padding:'0 16px',height:'56px',display:'flex',alignItems:'center',gap:'12px',position:'sticky',top:0,zIndex:100}}>
+      <div style={{background:'#0A0000',padding:'0 16px',height:'56px',display:'flex',alignItems:'center',gap:'12px',position:'sticky',top:0,zIndex:100}}>
         <button onClick={()=>nav('/referee')} style={{background:'rgba(255,255,255,0.08)',border:'none',color:'#fff',width:'36px',height:'36px',borderRadius:'10px',fontSize:'18px',display:'flex',alignItems:'center',justifyContent:'center'}}>←</button>
         <div style={{fontFamily:'Syne,sans-serif',fontSize:'16px',fontWeight:800,color:'#fff'}}>Live Scoring</div>
         <div style={{marginLeft:'auto',fontSize:'10px',fontWeight:700,color:'var(--red)',background:'rgba(239,68,68,0.15)',border:'1px solid rgba(239,68,68,0.3)',borderRadius:'20px',padding:'4px 10px',animation:'pulse 2s infinite'}}>🔴 LIVE</div>
       </div>
 
       {/* Match header */}
-      <div style={{background:'linear-gradient(135deg,var(--navy) 0%,#0D1B3E 100%)',padding:'20px 16px 24px'}}>
+      <div style={{background:'linear-gradient(135deg,#0A0000 0%,#0D1B3E 100%)',padding:'20px 16px 24px'}}>
         <div style={{fontFamily:'Syne,sans-serif',fontSize:'18px',fontWeight:800,color:'#fff',marginBottom:'4px'}}>{match.title}</div>
         <div style={{fontSize:'12px',color:'#64748B'}}>{match.sport} · {match.location}</div>
       </div>
@@ -78,7 +78,7 @@ export default function LiveScoring() {
           <div style={{fontSize:'11px',fontWeight:700,color:'var(--green-dark)',marginBottom:'2px'}}>📤 Viewer link</div>
           <div style={{fontSize:'10px',color:'var(--slate)',fontFamily:'monospace',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{viewerUrl}</div>
         </div>
-        <button onClick={copyLink} style={{padding:'6px 14px',borderRadius:'8px',background:copied?'var(--green-dark)':'var(--green)',border:'none',fontSize:'12px',fontWeight:700,color:'var(--navy)',flexShrink:0,transition:'background .2s'}}>
+        <button onClick={copyLink} style={{padding:'6px 14px',borderRadius:'8px',background:copied?'var(--green-dark)':'var(--green)',border:'none',fontSize:'12px',fontWeight:700,color:'#0A0000',flexShrink:0,transition:'background .2s'}}>
           {copied ? 'Copied!' : 'Copy'}
         </button>
       </div>
@@ -119,11 +119,11 @@ export default function LiveScoring() {
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',margin:'0 16px 12px',padding:'12px 14px',background:'var(--white)',borderRadius:'12px',border:'1px solid var(--border)'}}>
         <div>
           <div style={{fontSize:'11px',fontWeight:600,color:'var(--slate)',textTransform:'uppercase',letterSpacing:'0.5px'}}>Period</div>
-          <div style={{fontFamily:'Syne,sans-serif',fontSize:'16px',fontWeight:800,color:'var(--navy)'}}>{score.current_period||'Start'}</div>
+          <div style={{fontFamily:'Syne,sans-serif',fontSize:'16px',fontWeight:800,color:'#0A0000'}}>{score.current_period||'Start'}</div>
         </div>
         <div style={{display:'flex',gap:'6px',flexWrap:'wrap',justifyContent:'flex-end'}}>
           {periods.slice(0,4).map(p=>(
-            <button key={p} onClick={()=>setPeriod(p)} style={{padding:'5px 10px',borderRadius:'8px',border:`1px solid ${score.current_period===p?'var(--navy)':'var(--border)'}`,background:score.current_period===p?'var(--navy)':'var(--white)',color:score.current_period===p?'var(--white)':'var(--navy)',fontSize:'11px',fontWeight:700,transition:'all .2s'}}>{p}</button>
+            <button key={p} onClick={()=>setPeriod(p)} style={{padding:'5px 10px',borderRadius:'8px',border:`1px solid ${score.current_period===p?'#0A0000':'var(--border)'}`,background:score.current_period===p?'#0A0000':'var(--white)',color:score.current_period===p?'var(--white)':'#0A0000',fontSize:'11px',fontWeight:700,transition:'all .2s'}}>{p}</button>
           ))}
         </div>
       </div>
@@ -134,14 +134,14 @@ export default function LiveScoring() {
         {events.slice(0,4).map(e=>(
           <div key={e.id} style={{display:'flex',alignItems:'center',gap:'10px',padding:'8px 0',borderBottom:'1px solid var(--border)'}}>
             <div style={{fontSize:'10px',color:'var(--slate)',width:'40px',flexShrink:0}}>{new Date(e.created_at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
-            <div style={{fontSize:'13px',color:'var(--navy)',fontWeight:500}}>{e.description}</div>
+            <div style={{fontSize:'13px',color:'#0A0000',fontWeight:500}}>{e.description}</div>
           </div>
         ))}
       </div>
 
       {/* End match */}
       <div style={{padding:'0 16px 30px'}}>
-        <button onClick={handleFinish} style={{width:'100%',padding:'14px',borderRadius:'12px',border:'none',background:'var(--navy)',color:'var(--white)',fontSize:'15px',fontWeight:700}}>
+        <button onClick={handleFinish} style={{width:'100%',padding:'14px',borderRadius:'12px',border:'none',background:'#0A0000',color:'var(--white)',fontSize:'15px',fontWeight:700}}>
           🏁 End Match
         </button>
       </div>
