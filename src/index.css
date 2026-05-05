@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --green:#00C97B;--green-dark:#00A362;--green-pale:#E6FFF4;
-  --navy:#0A0F1E;--navy2:#141929;--slate:#6B7280;--border:#E5E7EB;
-  --bg:#F8FAFC;--white:#fff;--red:#EF4444;--purple:#8B5CF6;--amber:#F59E0B;
+  --pink:#F63676;--pink-dark:#C41F5A;--pink-pale:#FEE8F0;
+  --gray:#757070;--gray-light:#F5F5F5;
+  --yellow:#EDFF00;--yellow-dark:#C4D400;
+  --black:#0A0000;--black2:#140008;--black3:#1E000D;
+  --white:#FFFFFF;--bg:#F8F8F8;--border:#E5E7EB;
+  --slate:#6B7280;--slate2:#9CA3AF;
+  --red:#EF4444;--purple:#8B5CF6;--green:#10B981;
+  --font-head:'Montserrat',sans-serif;
+  --font-body:'DM Sans',sans-serif;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh}
+body{font-family:var(--font-body);background:var(--black);color:var(--white);min-height:100vh}
 a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:'DM Sans',sans-serif}
-input,select,textarea{font-family:'DM Sans',sans-serif}
+button{cursor:pointer;font-family:var(--font-body)}
+input,select,textarea{font-family:var(--font-body)}
