@@ -5,7 +5,7 @@ import { Logo } from '../components/Logo'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const SPORTS = [{id:'Tennis',icon:'🎾'},{id:'Padel',icon:'🏓'},{id:'Pickleball',icon:'🏓'},{id:'Basketball',icon:'🏀'},{id:'Soccer',icon:'⚽'},{id:'Volleyball',icon:'🏐'},{id:'Beach Tennis',icon:'🎾'},{id:'Beach Volleyball',icon:'🏐'}]
+const SPORTS = [{id:'Padel'},{id:'Pickleball'},{id:'Beach Tennis'},{id:'Basketball'},{id:'Soccer'},{id:'Volleyball'},{id:'Tennis'},{id:'Beach Volleyball'}]
 
 export default function CreateMatch() {
   const nav = useNavigate()
@@ -66,7 +66,7 @@ export default function CreateMatch() {
           <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}}>
             {SPORTS.map(s=>(
               <div key={s.id} onClick={()=>set('sport',s.id)} style={{border:`1.5px solid ${form.sport===s.id?'#F63676':'rgba(255,255,255,0.06)'}`,borderRadius:'10px',padding:'10px 6px',cursor:'pointer',textAlign:'center',background:form.sport===s.id?'rgba(246,54,118,0.08)':'rgba(255,255,255,0.02)'}}>
-                <div style={{fontSize:'22px',marginBottom:'4px'}}>{s.icon}</div>
+                
                 <div style={{fontSize:'10px',fontWeight:700,color:form.sport===s.id?'#F63676':'#757070',fontFamily:'Montserrat,sans-serif',textTransform:'uppercase'}}>{s.id}</div>
               </div>
             ))}
