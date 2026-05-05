@@ -106,16 +106,14 @@ export default function PlayerDash() {
         <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'24px',fontWeight:900,color:'#FFFFFF',letterSpacing:'-0.5px'}}>{profile?.full_name?.split(' ')[0]} <span style={{color:'#F63676'}}>{profile?.full_name?.split(' ').slice(1).join(' ')}</span></div>
       </div>
 
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'10px',padding:'16px',paddingBottom:'0'}}>
-        <div style={{background:'rgba(255,255,255,0.03)',borderRadius:'14px',padding:'16px',border:'1px solid rgba(255,255,255,0.06)'}}>
-          <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'30px',fontWeight:900,color:'#FFFFFF'}}>{matches.length}</div>
-          <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>Total Matches</div>
-        </div>
-        <div style={{background:'rgba(246,54,118,0.08)',borderRadius:'14px',padding:'16px',border:'1px solid rgba(246,54,118,0.15)'}}>
-          <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'30px',fontWeight:900,color:'#F63676'}}>{availableRefs.length}</div>
-          <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>Refs Available Now</div>
-        </div>
-      </div>
+<div onClick={()=>setActiveTab('matches')} style={{background:'rgba(255,255,255,0.03)',borderRadius:'14px',padding:'16px',border:'1px solid rgba(255,255,255,0.06)',cursor:'pointer'}}>
+  <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'30px',fontWeight:900,color:'#FFFFFF'}}>{matches.length}</div>
+  <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>Total Matches</div>
+</div>
+<div onClick={()=>setActiveTab('map')} style={{background:'rgba(246,54,118,0.08)',borderRadius:'14px',padding:'16px',border:'1px solid rgba(246,54,118,0.15)',cursor:'pointer'}}>
+  <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'30px',fontWeight:900,color:'#F63676'}}>{availableRefs.length}</div>
+  <div style={{fontSize:'11px',color:'#757070',marginTop:'2px',fontFamily:'DM Sans,sans-serif'}}>Refs Available Now</div>
+</div>
 
       <div style={{padding:'16px',paddingBottom:'0'}}>
         <button onClick={()=>nav('/create-match')} style={{width:'100%',padding:'15px',borderRadius:'12px',border:'none',background:'#F63676',color:'#FFFFFF',fontSize:'13px',fontWeight:800,fontFamily:'Montserrat,sans-serif',letterSpacing:'1px',textTransform:'uppercase'}}>

@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom'
+
 export function Logo({ size = 'md', showTagline = false }) {
+  const nav = useNavigate()
   const sizes = { sm:{h:16,t:16,s:9}, md:{h:22,t:22,s:10}, lg:{h:32,t:32,s:12} }
   const s = sizes[size]
   return (
-    <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+    <div onClick={()=>nav('/')} style={{display:'flex',alignItems:'center',gap:'10px',cursor:'pointer'}}>
       <div style={{display:'flex',gap:'3px',alignItems:'center'}}>
         <div style={{width:`${s.h*0.38}px`,height:`${s.h}px`,background:'#F63676',transform:'skewX(-12deg)',borderRadius:'2px'}}></div>
         <div style={{width:`${s.h*0.38}px`,height:`${s.h}px`,background:'#757070',transform:'skewX(-12deg)',borderRadius:'2px'}}></div>
@@ -19,10 +22,11 @@ export function Logo({ size = 'md', showTagline = false }) {
 }
 
 export function LogoDark({ size = 'md', showTagline = false }) {
+  const nav = useNavigate()
   const sizes = { sm:{h:16,t:16,s:9}, md:{h:22,t:22,s:10}, lg:{h:32,t:32,s:12} }
   const s = sizes[size]
   return (
-    <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+    <div onClick={()=>nav('/')} style={{display:'flex',alignItems:'center',gap:'10px',cursor:'pointer'}}>
       <div style={{display:'flex',gap:'3px',alignItems:'center'}}>
         <div style={{width:`${s.h*0.38}px`,height:`${s.h}px`,background:'#F63676',transform:'skewX(-12deg)',borderRadius:'2px'}}></div>
         <div style={{width:`${s.h*0.38}px`,height:`${s.h}px`,background:'#757070',transform:'skewX(-12deg)',borderRadius:'2px'}}></div>
