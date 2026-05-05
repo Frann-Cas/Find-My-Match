@@ -21,11 +21,26 @@ export default function RefereeDash() {
     supabase.from('referee_profiles').select('available_mode,total_earnings').eq('user_id',profile.id).single().then(({data})=>{if(data){setAvailable(data.available_mode);setEarnings(data.total_earnings||0)}})
   },[profile?.id])
 
-  async function toggleAvailable(){
-    const v=!available; setAvailable(v)
+async function toggleAvailable(){
+  const v=!available; setAvailable(v)
+  if(v && navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async pos => {
+      await supabase.from('referee_profiles').upsert({
+        user_id:profile.id,
+        available_mode:true,
+        latitude:pos.coords.latitude,
+        longitude:pos.coords.longitude
+      },{onConflict:'user_id'})
+      refresh()
+    }, async () => {
+      await supabase.from('referee_profiles').upsert({user_id:profile.id,available_mode:true},{onConflict:'user_id'})
+      refresh()
+    })
+  } else {
     await supabase.from('referee_profiles').upsert({user_id:profile.id,available_mode:v},{onConflict:'user_id'})
     if(v) refresh()
   }
+}
 
   const card = {background:'rgba(255,255,255,0.03)',borderRadius:'16px',padding:'16px',border:'1px solid rgba(255,255,255,0.06)',marginBottom:'10px'}
 
