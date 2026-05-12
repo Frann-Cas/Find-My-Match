@@ -5,7 +5,7 @@ import { Logo } from '../components/Logo'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const SPORTS = [{id:'Padel'},{id:'Pickleball'},{id:'Beach Tennis'},{id:'Basketball'},{id:'Soccer'},{id:'Volleyball'},{id:'Tennis'},{id:'Beach Volleyball'}]
+const SPORTS = [{id:'Tennis'},{id:'Padel'},{id:'Pickleball'},{id:'Basketball'},{id:'Soccer'},{id:'Volleyball'},{id:'Beach Tennis'},{id:'Beach Volleyball'}]
 
 export default function CreateMatch() {
   const nav = useNavigate()
@@ -36,7 +36,7 @@ export default function CreateMatch() {
         .react-datepicker__current-month, .react-datepicker__day-name { color:#FFFFFF!important; font-weight:700!important; }
         .react-datepicker__day { color:#FFFFFF!important; border-radius:8px!important; }
         .react-datepicker__day:hover { background:rgba(246,54,118,0.2)!important; color:#F63676!important; }
-        .react-datepicker__day--selected { background:#F63676!important; color:#FFFFFF!important; }
+        .react-datepicker__day--selected { background:#F63676!important; color:FFFFFF!important; }
         .react-datepicker__navigation-icon::before { border-color:#F63676!important; }
         .react-datepicker__day--outside-month { color:#757070!important; }
         .react-datepicker__time-container { border-left:1px solid rgba(246,54,118,0.15)!important; }
