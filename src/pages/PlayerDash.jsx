@@ -118,6 +118,9 @@ export default function PlayerDash() {
       <div style={{padding:'16px',paddingBottom:'0'}}>
         <button onClick={()=>nav('/create-match')} style={{width:'100%',padding:'15px',borderRadius:'12px',border:'none',background:'#F63676',color:'#FFFFFF',fontSize:'13px',fontWeight:800,fontFamily:'Montserrat,sans-serif',letterSpacing:'1px',textTransform:'uppercase'}}>
           + POST MATCH REQUEST
+<button onClick={()=>nav('/find-partner')} style={{width:'100%',padding:'15px',borderRadius:'12px',border:'1px solid rgba(246,54,118,0.3)',background:'transparent',color:'#F63676',fontSize:'13px',fontWeight:800,fontFamily:'Montserrat,sans-serif',letterSpacing:'1px',textTransform:'uppercase',marginTop:'10px'}}>
+  🎾 FIND MY PARTNER
+</button>
         </button>
       </div>
 

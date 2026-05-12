@@ -1,3 +1,4 @@
+import FindMyPartner from './pages/FindPartner'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import Landing from './pages/Landing'
@@ -9,6 +10,7 @@ import CreateMatch from './pages/CreateMatch'
 import LiveScoring from './pages/LiveScoring'
 import ViewerPage from './pages/ViewerPage'
 import AdminPanel from './pages/AdminPanel'
+
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
@@ -31,6 +33,8 @@ export default function App() {
       <Route path="/referee" element={<PrivateRoute><RefereeDash /></PrivateRoute>} />
       <Route path="/score/:matchId" element={<PrivateRoute><LiveScoring /></PrivateRoute>} />
       <Route path="/admin" element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
+<Route path="/find-partner" element={<PrivateRoute><FindPartner /></PrivateRoute>} />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
