@@ -12,17 +12,23 @@ import ViewerPage from './pages/ViewerPage'
 import AdminPanel from './pages/AdminPanel'
 import FindPartner from './pages/FindPartner'
 
-
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
   if (loading) return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh'}}>Loading...</div>
   return user ? children : <Navigate to="/login" replace />
 }
 
+function AdminRoute({ children }) {
+  const { user, profile, loading } = useAuth()
+  if (loading) return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh'}}>Loading...</div>
+  if (!user) return <Navigate to="/login" replace />
+  if (profile?.role !== 'admin') return <Navigate to="/" replace />
+  return children
+}
+
 export default function App() {
   const { user, profile } = useAuth()
   const dash = !user ? '/login' : profile?.role === 'referee' ? '/referee' : profile?.role === 'admin' ? '/admin' : '/dashboard'
-
   return (
     <Routes>
       <Route path="/" element={user ? <Navigate to={dash} /> : <Landing />} />
@@ -33,9 +39,8 @@ export default function App() {
       <Route path="/create-match" element={<PrivateRoute><CreateMatch /></PrivateRoute>} />
       <Route path="/referee" element={<PrivateRoute><RefereeDash /></PrivateRoute>} />
       <Route path="/score/:matchId" element={<PrivateRoute><LiveScoring /></PrivateRoute>} />
-      <Route path="/admin" element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
-<Route path="/find-partner" element={<PrivateRoute><FindPartner /></PrivateRoute>} />
-
+      <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
+      <Route path="/find-partner" element={<PrivateRoute><FindPartner /></PrivateRoute>} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
