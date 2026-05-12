@@ -34,6 +34,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={user ? <Navigate to={dash} /> : <Landing />} />
+<Route path="/live-feed" element={<LiveFeed />} />
+<Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/live/:token" element={<ViewerPage />} />
