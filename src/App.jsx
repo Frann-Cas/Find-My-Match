@@ -1,5 +1,5 @@
 import FindMyPartner from './pages/FindPartner'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -14,10 +14,13 @@ import FindPartner from './pages/FindPartner'
 import LiveFeed from './pages/LiveFeed'
 import Leaderboard from './pages/Leaderboard'
 
+const PUBLIC_ROUTES = ['/live-feed', '/leaderboard', '/live', '/login', '/signup']
+
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
+  const location = useLocation()
   if (loading) return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh'}}>Loading...</div>
-  return user ? children : <Navigate to="/login" replace />
+  return user ? children : <Navigate to="/login" state={{ from: location }} replace />
 }
 
 function AdminRoute({ children }) {
@@ -28,17 +31,23 @@ function AdminRoute({ children }) {
   return children
 }
 
+function HomeRoute() {
+  const { user, profile, loading } = useAuth()
+  if (loading) return <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh'}}>Loading...</div>
+  if (!user) return <Landing />
+  const dash = profile?.role === 'referee' ? '/referee' : profile?.role === 'admin' ? '/admin' : '/dashboard'
+  return <Navigate to={dash} replace />
+}
+
 export default function App() {
-  const { user, profile } = useAuth()
-  const dash = !user ? '/login' : profile?.role === 'referee' ? '/referee' : profile?.role === 'admin' ? '/admin' : '/dashboard'
   return (
     <Routes>
       <Route path="/live-feed" element={<LiveFeed />} />
       <Route path="/leaderboard" element={<Leaderboard />} />
-      <Route path="/" element={user ? <Navigate to={dash} /> : <Landing />} />
+      <Route path="/live/:token" element={<ViewerPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/live/:token" element={<ViewerPage />} />
+      <Route path="/" element={<HomeRoute />} />
       <Route path="/dashboard" element={<PrivateRoute><PlayerDash /></PrivateRoute>} />
       <Route path="/create-match" element={<PrivateRoute><CreateMatch /></PrivateRoute>} />
       <Route path="/referee" element={<PrivateRoute><RefereeDash /></PrivateRoute>} />
