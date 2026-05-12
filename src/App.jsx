@@ -11,6 +11,8 @@ import LiveScoring from './pages/LiveScoring'
 import ViewerPage from './pages/ViewerPage'
 import AdminPanel from './pages/AdminPanel'
 import FindPartner from './pages/FindPartner'
+import LiveFeed from './pages/LiveFeed'
+import Leaderboard from './pages/Leaderboard'
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
@@ -41,6 +43,8 @@ export default function App() {
       <Route path="/score/:matchId" element={<PrivateRoute><LiveScoring /></PrivateRoute>} />
       <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
       <Route path="/find-partner" element={<PrivateRoute><FindPartner /></PrivateRoute>} />
+<Route path="/live-feed" element={<LiveFeed />} />
+<Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
