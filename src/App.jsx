@@ -10,6 +10,7 @@ import CreateMatch from './pages/CreateMatch'
 import LiveScoring from './pages/LiveScoring'
 import ViewerPage from './pages/ViewerPage'
 import AdminPanel from './pages/AdminPanel'
+import FindPartner from './pages/FindPartner'
 
 
 function PrivateRoute({ children }) {
