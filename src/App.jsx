@@ -33,9 +33,9 @@ export default function App() {
   const dash = !user ? '/login' : profile?.role === 'referee' ? '/referee' : profile?.role === 'admin' ? '/admin' : '/dashboard'
   return (
     <Routes>
+      <Route path="/live-feed" element={<LiveFeed />} />
+      <Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="/" element={user ? <Navigate to={dash} /> : <Landing />} />
-<Route path="/live-feed" element={<LiveFeed />} />
-<Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/live/:token" element={<ViewerPage />} />
@@ -45,8 +45,6 @@ export default function App() {
       <Route path="/score/:matchId" element={<PrivateRoute><LiveScoring /></PrivateRoute>} />
       <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
       <Route path="/find-partner" element={<PrivateRoute><FindPartner /></PrivateRoute>} />
-<Route path="/live-feed" element={<LiveFeed />} />
-<Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
