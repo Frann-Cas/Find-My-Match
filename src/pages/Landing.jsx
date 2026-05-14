@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 
-const SPORTS = ['🎾 Tennis','🏓 Padel','🏓 Pickleball','🏀 Basketball','⚽ Soccer','🏐 Volleyball','🎾 Beach Tennis','🏐 Beach Volleyball','⚾ Baseball']
+const SPORTS = [' Tennis',' Padel',' Pickleball',' Basketball',' Soccer',' Volleyball',' Beach Tennis',' Beach Volleyball',' Baseball']
 
 export default function Landing() {
   const nav = useNavigate()
@@ -24,7 +24,11 @@ export default function Landing() {
           YOUR MATCH.<br/><span style={{color:'#F63676'}}>YOUR REF.</span><br/>LIVE.
         </h1>
         <p style={{color:'#757070',fontSize:'15px',lineHeight:1.7,marginBottom:'16px',fontFamily:'DM Sans,sans-serif'}}>
-          Book certified referees on demand. Share live scores with anyone. Puerto Rico's first sports referee marketplace.
+          
+
+
+
+
         </p>
         <p style={{color:'#EDFF00',fontSize:'13px',fontWeight:700,lineHeight:1.6,marginBottom:'40px',fontFamily:'Montserrat,sans-serif',letterSpacing:'0.3px'}}>
           📊 Follow live scores in real time — or become a ref and earn fast cash at the matches you already love to watch.
