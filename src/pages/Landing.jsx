@@ -95,4 +95,4 @@ export default function Landing() {
             <div key={title} style={{textAlign:'center'}}>
               <div style={{fontSize:'28px',marginBottom:'6px'}}>{medal}</div>
               <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'11px',fontWeight:800,color:'#FFFFFF'}}>{title}</div>
-              <div style={{fontSize:'10px',color:'#757070
+              <div style={{fontSize:'10px',color:'#757070',fontFamily:'Montserrat,sans-serif'}}>{sub}</div>
